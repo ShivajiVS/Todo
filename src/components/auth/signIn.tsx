@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/form";
 import { PasswordInput } from "./password-input";
 import { SignInSchema } from "@/lib/validations";
+import { Password } from "./password";
 // import { FormError } from "./form-error";
 
 export default function SignInForm() {

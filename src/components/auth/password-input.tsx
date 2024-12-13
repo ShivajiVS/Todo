@@ -2,8 +2,7 @@ import { useState, forwardRef } from "react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { CustomPasswordInput } from "./custom-password";
 
-export interface PasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ className, type, ...props }, ref) => {
@@ -17,12 +16,12 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         suffix={
           showPassword ? (
             <EyeIcon
-              className="select-none w-5 h-5"
+              className="w-5 h-5 select-none"
               onClick={() => setShowPassword((PrevState) => !PrevState)}
             />
           ) : (
             <EyeOffIcon
-              className="select-none w-5 h-5 "
+              className="w-5 h-5 select-none "
               onClick={() => setShowPassword((PrevState) => !PrevState)}
             />
           )
