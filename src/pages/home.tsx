@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
-export function Home() {
+export default function Home() {
   return (
     <div className="flex items-center justify-center w-full min-h-screen">
       <div className="flex flex-col space-y-8">

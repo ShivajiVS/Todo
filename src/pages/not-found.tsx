@@ -1,4 +1,4 @@
-export function NotFound() {
+export default function NotFound() {
   return (
     <div className="box-border flex items-center justify-center w-full min-h-screen bg-background text-foreground">
       <div className="space-y-3 text-center bg-card">
