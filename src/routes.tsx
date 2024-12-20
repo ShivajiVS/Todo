@@ -3,12 +3,14 @@ import { lazy, Suspense } from "react";
 
 import ProtectedRoutes from "@/components/auth/protectedRoutes";
 import AuthRoute from "@/components/auth/isAuthRoutes";
+import Todo from "./pages/todo";
 
 const Home = lazy(() => import("./pages/home"));
 const Signin = lazy(() => import("./pages/sign-in"));
 const SignUp = lazy(() => import("./pages/sign-up"));
 const Account = lazy(() => import("./pages/account"));
 const NotFound = lazy(() => import("./pages/not-found"));
+const Todos = lazy(() => import("./pages/todos"));
 
 export default function Routing() {
   return (
@@ -48,6 +50,22 @@ export default function Routing() {
           element={
             <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
               <Account />{" "}
+            </Suspense>
+          }
+        />
+        <Route
+          path="/todos"
+          element={
+            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+              <Todos />{" "}
+            </Suspense>
+          }
+        />
+        <Route
+          path="/todo:id"
+          element={
+            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+              <Todo />
             </Suspense>
           }
         />

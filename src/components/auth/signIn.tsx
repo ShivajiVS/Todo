@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/form";
 import { PasswordInput } from "./password-input";
 import { SignInSchema } from "@/lib/validations";
-import { Password } from "./password";
 // import { FormError } from "./form-error";
 
 export default function SignInForm() {
@@ -47,8 +46,8 @@ export default function SignInForm() {
 
   return (
     <>
-      <div className="box-border py-12 pt-10 px-2">
-        <Card className="mx-auto max-w-sm lg:max-w-md ">
+      <div className="box-border px-2 py-12 pt-10">
+        <Card className="max-w-sm mx-auto lg:max-w-md ">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
             <CardDescription>
@@ -58,7 +57,7 @@ export default function SignInForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full max-w-md flex flex-col gap-4"
+              className="flex flex-col w-full max-w-md gap-4"
             >
               <CardContent>
                 <div className="grid gap-4">
@@ -111,7 +110,7 @@ export default function SignInForm() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full capitalize flex items-center space-x-2"
+                    className="flex items-center w-full space-x-2 capitalize"
                     disabled={isSubmitting}
                   >
                     <span>Login</span>
@@ -121,7 +120,7 @@ export default function SignInForm() {
             </form>
           </Form>
           <CardFooter className="flex-col">
-            <div className="mt-2 text-center text-sm">
+            <div className="mt-2 text-sm text-center">
               Don&apos;t have an account?{" "}
               <Link to="/sign-up" className="underline">
                 SignUp
