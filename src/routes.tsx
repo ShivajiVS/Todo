@@ -62,7 +62,7 @@ export default function Routing() {
           }
         />
         <Route
-          path="/todo:id"
+          path="/todo/:id"
           element={
             <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
               <Todo />
