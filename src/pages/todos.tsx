@@ -32,8 +32,8 @@ export default function Todos() {
 
   if (editTodo) {
     return (
-      <div className="absolute w-full max-w-lg transform -translate-x-1/2 -translate-y-1/2 wz-50 top-1/2 left-1/2">
-        <Card className="relative p-5 rounded-md">
+      <div className="absolute z-50 w-full max-w-lg transform -translate-x-1/2 -translate-y-1/2 top-1/3 left-1/2">
+        <Card className="relative px-2 py-5 rounded-md lg:p-10">
           <div className="absolute top-4 right-6">
             <button className="text-lg" onClick={isEditTodo}>
               X
