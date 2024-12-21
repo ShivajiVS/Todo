@@ -1,20 +1,15 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const TodoList = ({
   todos,
   onDeleteTodo,
+  isEditTodo,
 }: {
   todos: any[];
   onDeleteTodo: (id: string) => void;
+  isEditTodo: () => void;
 }) => {
   const navigate = useNavigate();
-
-  const [editTodo, setEditTodo] = useState(false);
-
-  if (editTodo) {
-    <div className="absolute"></div>;
-  }
 
   return (
     <div className="w-full max-w-4xl p-4 mx-auto mt-10 bg-white rounded-lg shadow-md">
@@ -62,7 +57,7 @@ const TodoList = ({
                     View
                   </button>
                   <button
-                    onClick={() => setEditTodo(true)}
+                    onClick={isEditTodo}
                     className="px-3 py-1 mr-2 text-white bg-yellow-500 rounded hover:bg-yellow-600"
                   >
                     Edit
