@@ -4,6 +4,8 @@ import { lazy, Suspense } from "react";
 import ProtectedRoutes from "@/components/auth/protectedRoutes";
 import AuthRoute from "@/components/auth/isAuthRoutes";
 import Todo from "./pages/todo";
+import { Loader2 } from "lucide-react";
+import { Loading } from "./components/loading";
 
 const Home = lazy(() => import("./pages/home"));
 const Signin = lazy(() => import("./pages/sign-in"));
@@ -20,7 +22,7 @@ export default function Routing() {
         <Route
           path="/"
           element={
-            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+            <Suspense fallback={<Loading />}>
               <Home />
             </Suspense>
           }
@@ -28,7 +30,7 @@ export default function Routing() {
         <Route
           path="/sign-in"
           element={
-            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+            <Suspense fallback={<Loading />}>
               <Signin />
             </Suspense>
           }
@@ -36,7 +38,7 @@ export default function Routing() {
         <Route
           path="/sign-up"
           element={
-            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+            <Suspense fallback={<Loading />}>
               <SignUp />{" "}
             </Suspense>
           }
@@ -48,7 +50,7 @@ export default function Routing() {
         <Route
           path="/account"
           element={
-            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+            <Suspense fallback={<Loading />}>
               <Account />{" "}
             </Suspense>
           }
@@ -56,7 +58,7 @@ export default function Routing() {
         <Route
           path="/todos"
           element={
-            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+            <Suspense fallback={<Loading />}>
               <Todos />{" "}
             </Suspense>
           }
@@ -64,7 +66,7 @@ export default function Routing() {
         <Route
           path="/todo/:id"
           element={
-            <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+            <Suspense fallback={<Loading />}>
               <Todo />
             </Suspense>
           }
@@ -75,7 +77,7 @@ export default function Routing() {
       <Route
         path="*"
         element={
-          <Suspense fallback={<div className="animate-pulse">Loading..</div>}>
+          <Suspense fallback={<Loading />}>
             <NotFound />{" "}
           </Suspense>
         }

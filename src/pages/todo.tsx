@@ -6,7 +6,13 @@ export default function Todo() {
   const todo = getTodoById(id!);
 
   if (!todo) {
-    return <p>Todo not found!</p>;
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-screen">
+        <p className="text-2xl font-semibold tracking-tight capitalize">
+          Todo not found!
+        </p>
+      </div>
+    );
   }
 
   return (

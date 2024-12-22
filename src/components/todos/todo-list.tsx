@@ -8,7 +8,7 @@ const TodoList = ({
 }: {
   todos: Todo[];
   onDeleteTodo: (id: string) => void;
-  isEditTodo: (todo:Todo, close?:boolean) => void;
+  isEditTodo: (todo: Todo, close?: boolean) => void;
 }) => {
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const TodoList = ({
                 <td className="px-4 py-2 border border-gray-300">
                   {todo.title}
                 </td>
-                <td className="px-4 py-2 border border-gray-300">
+                <td className="w-1/2 px-4 py-2 border border-gray-300">
                   {todo.description}
                 </td>
                 <td className="px-4 py-2 text-center border border-gray-300">
