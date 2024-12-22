@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { TodoForm } from "@/components/todos/todo-form";
 import TodoList from "@/components/todos/todo-list";
 import { getTodos, saveTodos, Todo } from "@/lib/localstorage";
@@ -14,36 +14,36 @@ export default function Todos() {
   }, []);
 
   const addTodo = (newTodo: Todo) => {
+    console.log("new todo is", newTodo);
     const updatedTodos = [...todos, newTodo];
+
+    console.log("after update", updatedTodos);
+
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
   };
 
-  const updateTodo = (updatedTodo: Todo) => {
-    // const updatedTodos = [...todos, updatedTodo];
-
+  const updateTodo = useCallback((updatedTodo: Todo) => {
     const updatedTodos = getTodos().map((todo) =>
       todo.id === updatedTodo.id ? updatedTodo : todo
     );
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
     setEditTodo(false);
+  }, []);
 
-    console.log("updated todos are", updatedTodos);
-  };
-
-  const deleteTodo = (id: string) => {
+  const deleteTodo = useCallback((id: string) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
-  };
+  }, []);
 
-  const isEditTodo = (currentTodo?: Todo, close?: boolean) => {
+  const isEditTodo = useCallback((currentTodo?: Todo, close?: boolean) => {
     console.log("current todo is", currentTodo);
     setEditTodo((prev) => !prev);
     if (!close) setCurrentTodo(currentTodo);
     console.log("state todo", currentTodo);
-  };
+  }, []);
 
   if (editTodo) {
     return (
@@ -66,6 +66,3 @@ export default function Todos() {
     </div>
   );
 }
-
-// close,
-// currentTodo

@@ -77,7 +77,7 @@ export const EditTodoForm = ({
           </div>
           <div className="w-full">
             <Button className="w-full px-5 uppercase" type="submit">
-              Add
+              Update
             </Button>
           </div>
         </form>
