@@ -1,3 +1,4 @@
+import { Todo } from "@/lib/localstorage";
 import { useNavigate } from "react-router-dom";
 
 const TodoList = ({
@@ -5,9 +6,9 @@ const TodoList = ({
   onDeleteTodo,
   isEditTodo,
 }: {
-  todos: any[];
+  todos: Todo[];
   onDeleteTodo: (id: string) => void;
-  isEditTodo: () => void;
+  isEditTodo: (todo:Todo, close?:boolean) => void;
 }) => {
   const navigate = useNavigate();
 
@@ -57,7 +58,7 @@ const TodoList = ({
                     View
                   </button>
                   <button
-                    onClick={isEditTodo}
+                    onClick={() => isEditTodo(todo)}
                     className="px-3 py-1 mr-2 text-white bg-yellow-500 rounded hover:bg-yellow-600"
                   >
                     Edit

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
+import { Todo } from "@/lib/localstorage";
 
-export const TodoForm = ({ onAddTodo }: { onAddTodo: (todo: any) => void }) => {
+export const TodoForm = ({ onAddTodo }: { onAddTodo: (todo: Todo) => void }) => {
   const [todo, setTodo] = useState<{ title: string; description: string }>({
     title: "",
     description: "",

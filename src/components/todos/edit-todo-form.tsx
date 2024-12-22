@@ -1,32 +1,50 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
+import { Todo } from "@/lib/localstorage";
 
 export const EditTodoForm = ({
-  onAddTodo,
+  currentTodo,
+  updateTodo,
+  isEditTodo,
 }: {
-  onAddTodo: (todo: any) => void;
+  currentTodo: Todo;
+  updateTodo: (todo: Todo) => void;
+  isEditTodo: (todo?: Todo, close?: boolean) => void;
 }) => {
-  const [todo, setTodo] = useState<{ title: string; description: string }>({
-    title: "",
-    description: "",
-  });
+  const [todo, setTodo] = useState<Todo>(currentTodo);
+
+  console.log("EditTodoForm recived todo", currentTodo);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const newTodo = {
-      ...todo,
-      id: Date.now().toString(),
-    };
-    onAddTodo(newTodo);
-    setTodo({ title: "", description: "" });
+    updateTodo(todo);
+    setTodo({ title: "", description: "", id: "" });
   };
 
   return (
     <div className="absolute z-50 w-full max-w-lg transform -translate-x-1/2 -translate-y-1/2 top-1/3 left-1/2">
       <Card className="relative flex items-center px-2 py-5 rounded-md lg:p-10">
+        <div className="absolute top-4 right-6">
+          <button className="text-lg" onClick={() => isEditTodo()}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
         <form
-          className="flex flex-col w-full space-y-6"
+          className="flex flex-col w-full mt-5 space-y-6"
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col space-y-2">
