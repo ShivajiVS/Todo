@@ -3,7 +3,11 @@ import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { Todo } from "@/lib/localstorage";
 
-export const TodoForm = ({ onAddTodo }: { onAddTodo: (todo: Todo) => void }) => {
+export const TodoForm = ({
+  onAddTodo,
+}: {
+  onAddTodo: (todo: Todo) => void;
+}) => {
   const [todo, setTodo] = useState<{ title: string; description: string }>({
     title: "",
     description: "",
@@ -20,7 +24,7 @@ export const TodoForm = ({ onAddTodo }: { onAddTodo: (todo: Todo) => void }) => 
   };
 
   return (
-    <Card className="flex items-center max-w-lg py-10 mx-auto rounded-lg px-14">
+    <Card className="flex items-center max-w-lg py-10 mx-2 rounded-lg lg:mx-auto px-14">
       <form className="w-full space-y-4" onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-2">
           <label htmlFor="title">Title</label>
