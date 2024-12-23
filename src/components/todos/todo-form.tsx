@@ -17,7 +17,7 @@ export const TodoForm = ({
     event.preventDefault();
     const newTodo = {
       ...todo,
-      id: Date.now().toString(),
+      id:crypto.randomUUID()
     };
     onAddTodo(newTodo);
     setTodo({ title: "", description: "" });

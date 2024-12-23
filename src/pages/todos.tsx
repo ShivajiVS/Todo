@@ -23,27 +23,29 @@ export default function Todos() {
     saveTodos(updatedTodos);
   };
 
-  const updateTodo = useCallback((updatedTodo: Todo) => {
+  const updateTodo = (updatedTodo: Todo) => {
     const updatedTodos = getTodos().map((todo) =>
       todo.id === updatedTodo.id ? updatedTodo : todo
     );
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
     setEditTodo(false);
-  }, []);
+  };
 
-  const deleteTodo = useCallback((id: string) => {
+  const deleteTodo = (id: string) => {
+    console.log("todo id", id);
     const updatedTodos = todos.filter((todo) => todo.id !== id);
+    console.log("after filter", updatedTodos);
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
-  }, []);
+  };
 
-  const isEditTodo = useCallback((currentTodo?: Todo, close?: boolean) => {
+  const isEditTodo = (currentTodo?: Todo, close?: boolean) => {
     console.log("current todo is", currentTodo);
     setEditTodo((prev) => !prev);
     if (!close) setCurrentTodo(currentTodo);
     console.log("state todo", currentTodo);
-  }, []);
+  };
 
   if (editTodo) {
     return (

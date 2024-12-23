@@ -12,6 +12,8 @@ const TodoList = ({
 }) => {
   const navigate = useNavigate();
 
+  console.log("tsosos", todos);
+
   return (
     <div className="w-full max-w-4xl p-4 mx-auto mt-10 bg-white rounded-lg shadow-md">
       <h1 className="mb-6 text-2xl font-bold text-center text-gray-800">
