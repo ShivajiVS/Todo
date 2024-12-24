@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { TodoForm } from "@/components/todos/todo-form";
 import TodoList from "@/components/todos/todo-list";
 import { getTodos, saveTodos, Todo } from "@/lib/localstorage";
 import { EditTodoForm } from "@/components/todos/edit-todo-form";
+import { Todolist } from "@/components/todos/todolist";
 
 export default function Todos() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -14,11 +15,7 @@ export default function Todos() {
   }, []);
 
   const addTodo = (newTodo: Todo) => {
-    console.log("new todo is", newTodo);
     const updatedTodos = [...todos, newTodo];
-
-    console.log("after update", updatedTodos);
-
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
   };
@@ -33,18 +30,14 @@ export default function Todos() {
   };
 
   const deleteTodo = (id: string) => {
-    console.log("todo id", id);
     const updatedTodos = todos.filter((todo) => todo.id !== id);
-    console.log("after filter", updatedTodos);
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
   };
 
   const isEditTodo = (currentTodo?: Todo, close?: boolean) => {
-    console.log("current todo is", currentTodo);
     setEditTodo((prev) => !prev);
     if (!close) setCurrentTodo(currentTodo);
-    console.log("state todo", currentTodo);
   };
 
   if (editTodo) {
@@ -60,7 +53,7 @@ export default function Todos() {
   return (
     <div className="relative w-full h-screen max-w-6xl mx-auto mt-10">
       <TodoForm onAddTodo={addTodo} />
-      <TodoList
+      <Todolist
         todos={todos}
         onDeleteTodo={deleteTodo}
         isEditTodo={isEditTodo}
