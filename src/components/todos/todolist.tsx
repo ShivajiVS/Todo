@@ -23,7 +23,7 @@ export const Todolist = ({
   if (todos.length === 0) return <div>no todos</div>;
 
   return (
-    <section className="flex flex-col w-full max-w-4xl px-2 pb-20 mt-10 space-y-4 lg:mx-auto">
+    <section className="flex flex-col w-full max-w-4xl px-1 pb-20 mt-10 space-y-4 lg:mx-auto">
       {todos.map((item) => (
         <Card key={item.id} className="flex flex-col px-5 py-5 space-y-2">
           <div className="flex items-center justify-between space-x-2">
