@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { TodoForm } from "@/components/todos/todo-form";
-import TodoList from "@/components/todos/todo-list";
 import { getTodos, saveTodos, Todo } from "@/lib/localstorage";
 import { EditTodoForm } from "@/components/todos/edit-todo-form";
 import { Todolist } from "@/components/todos/todolist";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 
 export default function Todos() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -21,6 +21,9 @@ export default function Todos() {
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
     setIsNewTodo(false);
+    toast({
+      title: "New Todo Successful..",
+    });
   };
 
   const updateTodo = (updatedTodo: Todo) => {
@@ -30,12 +33,19 @@ export default function Todos() {
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
     setEditTodo(false);
+    toast({
+      title: "Todo successful Updated..",
+    });
   };
 
   const deleteTodo = (id: string) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
     saveTodos(updatedTodos);
+    toast({
+      title: "Todo deleted Successful..",
+      variant: "destructive",
+    });
   };
 
   const isEditTodo = (currentTodo?: Todo, close?: boolean) => {

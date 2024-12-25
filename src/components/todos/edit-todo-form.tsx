@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { Todo } from "@/lib/localstorage";
+import { Textarea } from "../ui/textarea";
+import { Input } from "../ui/input";
 
 export const EditTodoForm = ({
   currentTodo,
@@ -49,30 +51,26 @@ export const EditTodoForm = ({
         >
           <div className="flex flex-col space-y-2">
             <label htmlFor="title">Title</label>
-            <input
-              type="text"
+            <Input
               placeholder="title"
               id="title"
-              required
-              className="h-10 px-2 border rounded-md outline-none"
               value={todo.title}
               onChange={(e) =>
                 setTodo((prev) => ({ ...prev, title: e.target.value }))
               }
+              required
             />
           </div>
           <div className="flex flex-col space-y-2">
             <label htmlFor="description">Description</label>
-            <input
-              type="text"
-              placeholder="description"
+            <Textarea
+              placeholder="Type your message here."
               id="description"
-              required
-              className="h-10 px-2 border rounded-md outline-none"
               value={todo.description}
               onChange={(e) =>
                 setTodo((prev) => ({ ...prev, description: e.target.value }))
               }
+              required
             />
           </div>
           <div className="w-full">
