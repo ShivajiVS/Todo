@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { UseFormReturn } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, redirect, useNavigate } from "react-router";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,8 @@ import {
 } from "@/components/ui/form";
 import { PasswordInput } from "./password-input";
 import { SignUpSchema } from "@/lib/validations";
+import { createUser } from "@/lib/localstorage";
+import { toast } from "@/hooks/use-toast";
 
 interface FormStep1Props {
   form: UseFormReturn<z.infer<typeof SignUpSchema>>;
@@ -77,7 +79,7 @@ function FormStep1({ form, onNextStep }: FormStep1Props) {
           </FormItem>
         )}
       />
-      <Button className="w-full  " onClick={onNextStep}>
+      <Button className="w-full " onClick={onNextStep}>
         Next
       </Button>
     </motion.div>
@@ -145,8 +147,15 @@ export default function SignUpForm() {
     }
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = async (values: z.infer<typeof SignUpSchema>) => {
-    console.log("values", values);
+    const { fullName, email, password } = values;
+    createUser({ fullName, email, password });
+    toast({
+      title: "user created Successful..",
+    });
+    navigate("/sign-in");
   };
 
   const {
@@ -154,8 +163,8 @@ export default function SignUpForm() {
   } = form;
 
   return (
-    <div className="box-border py-12 lg:pt-16 px-2">
-      <Card className="mx-auto max-w-sm lg:max-w-md">
+    <div className="box-border px-2 py-12 lg:pt-16">
+      <Card className="max-w-sm mx-auto lg:max-w-md">
         <CardHeader>
           <CardTitle className="text-xl text-center">
             Create an Account
@@ -173,7 +182,7 @@ export default function SignUpForm() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full max-w-md lg:max-w-lg flex flex-col gap-4"
+            className="flex flex-col w-full max-w-md gap-4 lg:max-w-lg"
           >
             <CardContent>
               {formStep === 0 && (
@@ -185,9 +194,9 @@ export default function SignUpForm() {
             </CardContent>
           </form>
           <CardFooter className="flex-col">
-            <div className="mt-2 text-center text-sm">
+            <div className="mt-2 text-sm text-center">
               Already have an account?
-              <Link to="/sign-in" className="underline ml-1">
+              <Link to="/sign-in" className="ml-1 underline">
                 Sign in
               </Link>
             </div>

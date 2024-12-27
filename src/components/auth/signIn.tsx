@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 // import { Loader2 } from "lucide-react";
 
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,9 @@ import {
 } from "@/components/ui/form";
 import { PasswordInput } from "./password-input";
 import { SignInSchema } from "@/lib/validations";
+import { getUser } from "@/lib/localstorage";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 // import { FormError } from "./form-error";
 
 export default function SignInForm() {
@@ -36,8 +39,23 @@ export default function SignInForm() {
     },
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
   const onSubmit = async (values: z.infer<typeof SignInSchema>) => {
     console.log(values);
+    const user = getUser();
+    if (user?.email !== values.email) {
+      setErrorMessage("InValid Email Address");
+    }
+    if (user?.password !== values.password) {
+      setErrorMessage("InValid Password");
+    }
+    toast({
+      title: "Sign-in Successful..",
+    });
+    navigate("/todos");
   };
 
   const {

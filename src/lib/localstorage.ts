@@ -5,7 +5,6 @@ export interface Todo {
 }
 
 export interface UserType {
-  id: string;
   fullName: string;
   email: string;
   password: string;
@@ -25,11 +24,11 @@ export const getTodoById = (id: string): Todo | undefined => {
   return todos.find((todo) => todo.id === id);
 };
 
-export const createUser = (): UserType | undefined => {
-  const user = localStorage.getItem("user");
-  return user ? (JSON.parse(user) as UserType) : undefined;
+export const createUser = (user: UserType) => {
+  localStorage.setItem("user", JSON.stringify(user));
 };
 
-export const getUser = (user: UserType) => {
-  localStorage.setItem("user", JSON.stringify(user));
+export const getUser = (): UserType | undefined => {
+  const user = localStorage.getItem("user");
+  return user ? (JSON.parse(user) as UserType) : undefined;
 };
