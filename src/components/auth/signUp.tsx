@@ -129,6 +129,8 @@ function FormStep2({ form, isSubmitting }: FormStep2Props) {
 
 export default function SignUpForm() {
   const [formStep, setFormStep] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -151,7 +153,8 @@ export default function SignUpForm() {
 
   const onSubmit = async (values: z.infer<typeof SignUpSchema>) => {
     const { fullName, email, password } = values;
-    createUser({ fullName, email, password });
+    const res = createUser({ fullName, email, password });
+    if (!res?.status) setErrorMessage(res?.message!);
     toast({
       title: "user created Successful..",
     });
