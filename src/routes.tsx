@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 import ProtectedRoutes from "@/components/auth/protectedRoutes";
 import AuthRoute from "@/components/auth/isAuthRoutes";
 import Todo from "./pages/todo";
-import { Loader2 } from "lucide-react";
 import { Loading } from "./components/loading";
 
 const Home = lazy(() => import("./pages/home"));
