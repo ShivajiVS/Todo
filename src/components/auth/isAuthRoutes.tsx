@@ -1,8 +1,8 @@
-import { getUser } from "@/lib/localstorage";
+import { getAuthUser } from "@/lib/localstorage";
 import { Navigate, Outlet } from "react-router";
 
 const AuthRoute = () => {
-  const user = getUser();
+  const user = getAuthUser();
   return user ? <Outlet /> : <Navigate to="/sign-in" />;
 };
 
