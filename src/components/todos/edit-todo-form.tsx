@@ -25,7 +25,7 @@ export const EditTodoForm = ({
   };
 
   return (
-    <div className="absolute z-50 w-full max-w-lg transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ">
+    <div className="absolute z-50 w-full max-w-xl transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ">
       <Card className="relative flex items-center px-2 py-8 mx-2 rounded-md lg:p-16">
         <div className="absolute top-4 right-6">
           <button className="text-lg" onClick={() => isEditTodo()}>
@@ -64,7 +64,7 @@ export const EditTodoForm = ({
           <div className="flex flex-col space-y-2">
             <label htmlFor="description">Description</label>
             <Textarea
-              placeholder="Type your message here."
+              placeholder="Type your description here."
               id="description"
               value={todo.description}
               onChange={(e) =>
