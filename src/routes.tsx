@@ -12,6 +12,8 @@ const SignUp = lazy(() => import("./pages/sign-up"));
 const Account = lazy(() => import("./pages/account"));
 const NotFound = lazy(() => import("./pages/not-found"));
 const Todos = lazy(() => import("./pages/todos"));
+const Admin = lazy(() => import("./pages/admin"));
+const User = lazy(() => import("./pages/user"));
 
 export default function Routing() {
   return (
@@ -67,6 +69,22 @@ export default function Routing() {
           element={
             <Suspense fallback={<Loading />}>
               <Todo />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Admin />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <Suspense fallback={<Loading />}>
+              <User />
             </Suspense>
           }
         />

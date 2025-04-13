@@ -29,7 +29,7 @@ export const TodoForm = ({
 
   return (
     <div className="absolute z-50 w-full max-w-2xl transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ">
-      <Card className="relative flex items-center max-w-lg px-5 py-10 mx-2 rounded-md lg:mx-auto lg:p-16">
+      <Card className="relative flex items-center max-w-xl px-5 py-10 mx-2 rounded-md lg:mx-auto lg:p-16">
         {/* // flex items-center px-2 py-8 mx-2 rounded-md lg:p-16 */}
         <div className="absolute top-4 right-6">
           <button className="text-lg" onClick={isNewTodo}>
@@ -65,7 +65,7 @@ export const TodoForm = ({
           <div className="flex flex-col space-y-2">
             <label htmlFor="description">Description</label>
             <Textarea
-              placeholder="Type your message here."
+              placeholder="Type your description here.."
               id="description"
               value={todo.description}
               onChange={(e) =>
