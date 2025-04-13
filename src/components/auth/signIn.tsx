@@ -25,10 +25,10 @@ import {
 } from "@/components/ui/form";
 import { PasswordInput } from "./password-input";
 import { SignInSchema } from "@/lib/validations";
-import { getUser } from "@/lib/localstorage";
+import { createAuthUser, getUser } from "@/lib/localstorage";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
-// import { FormError } from "./form-error";
+import { FormError } from "./form-error";
 
 export default function SignInForm() {
   const form = useForm<z.infer<typeof SignInSchema>>({
@@ -45,18 +45,29 @@ export default function SignInForm() {
 
   const onSubmit = async (values: z.infer<typeof SignInSchema>) => {
     console.log(values);
+    
     const user = getUser();
-    if (user?.email !== values.email) {
-      setErrorMessage("InValid Email Address");
+    
+    if (!user?.email?.trim() || user.email.trim() !== values.email.trim()) {
+      setErrorMessage("Invalid Email Address");
+      return;
     }
-    if (user?.password !== values.password) {
-      setErrorMessage("InValid Password");
+  
+    if (!user?.password || user.password !== values.password) {
+      setErrorMessage("Invalid Password");
+      return;
     }
+  
+    const res = createAuthUser(user);
+    if (!res?.status) return;
+  
     toast({
-      title: "Sign-in Successful..",
+      title: "Sign-in Successful",
     });
+  
     navigate("/todos");
   };
+  
 
   const {
     formState: { isSubmitting },
@@ -65,6 +76,11 @@ export default function SignInForm() {
   return (
     <>
       <div className="box-border px-2 py-12 pt-10">
+        {errorMessage && (
+          <div className="max-w-sm mx-auto mb-4 lg:max-w-md">
+            <FormError message={errorMessage} />
+          </div>
+        )}
         <Card className="max-w-sm mx-auto lg:max-w-md ">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>

@@ -24,11 +24,46 @@ export const getTodoById = (id: string): Todo | undefined => {
   return todos.find((todo) => todo.id === id);
 };
 
-export const createUser = (user: UserType) => {
-  localStorage.setItem("user", JSON.stringify(user));
+export const createUser = (
+  user: UserType
+): { message: string; status: boolean } => {
+  try {
+    localStorage.setItem("user", JSON.stringify(user));
+    return {
+      message: "created a user Successful",
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: "unable create a user",
+      status: false,
+    };
+  }
+};
+
+export const createAuthUser = (
+  user: UserType
+): { message: string; status: boolean } => {
+  try {
+    localStorage.setItem("authUser", JSON.stringify(user));
+    return {
+      message: "created a user Successful",
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: "unable create a user",
+      status: false,
+    };
+  }
 };
 
 export const getUser = (): UserType | undefined => {
   const user = localStorage.getItem("user");
+  return user ? (JSON.parse(user) as UserType) : undefined;
+};
+
+export const getAuthUser = (): UserType | undefined => {
+  const user = localStorage.getItem("authUser");
   return user ? (JSON.parse(user) as UserType) : undefined;
 };

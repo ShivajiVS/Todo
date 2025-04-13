@@ -1,9 +1,9 @@
-import { getUser } from "@/lib/localstorage";
+import { getAuthUser } from "@/lib/localstorage";
 import { Navigate, Outlet } from "react-router";
 
 const ProtectedRoutes = () => {
-  const user = getUser();
-  return user ? <Navigate to="/account" /> : <Outlet />;
+  const user = getAuthUser();
+  return user ? <Navigate to="/todos" /> : <Outlet />;
 };
 
 export default ProtectedRoutes;

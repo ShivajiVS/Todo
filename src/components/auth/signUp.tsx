@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { UseFormReturn } from "react-hook-form";
-import { Link, redirect, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,7 @@ import { PasswordInput } from "./password-input";
 import { SignUpSchema } from "@/lib/validations";
 import { createUser } from "@/lib/localstorage";
 import { toast } from "@/hooks/use-toast";
+import { FormError } from "./form-error";
 
 interface FormStep1Props {
   form: UseFormReturn<z.infer<typeof SignUpSchema>>;
@@ -129,6 +130,8 @@ function FormStep2({ form, isSubmitting }: FormStep2Props) {
 
 export default function SignUpForm() {
   const [formStep, setFormStep] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -151,7 +154,8 @@ export default function SignUpForm() {
 
   const onSubmit = async (values: z.infer<typeof SignUpSchema>) => {
     const { fullName, email, password } = values;
-    createUser({ fullName, email, password });
+    const res = createUser({ fullName, email, password });
+    if (!res?.status) setErrorMessage(res?.message!);
     toast({
       title: "user created Successful..",
     });
@@ -164,6 +168,11 @@ export default function SignUpForm() {
 
   return (
     <div className="box-border px-2 py-12 lg:pt-16">
+      {errorMessage && (
+        <div className="max-w-sm mx-auto mb-4 lg:max-w-md">
+          <FormError message={errorMessage} />
+        </div>
+      )}
       <Card className="max-w-sm mx-auto lg:max-w-md">
         <CardHeader>
           <CardTitle className="text-xl text-center">
