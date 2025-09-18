@@ -38,6 +38,9 @@ jobs:
           [ -d ".next" ] && echo "📦 .next size: $(du -sh .next | cut -f1)" || echo "⚠️  No .next directory"
           [ -d "out" ] && echo "📦 out size: $(du -sh out | cut -f1)" || echo "⚠️  No out directory"
 
+      - name: view dist
+        run: cd dist && ls
+
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: build
@@ -45,7 +48,7 @@ jobs:
   #   steps:
   #     - name: Checkout code
   #       uses: actions/checkout@v4
-      
+
   #     - name: Configure AWS credentials
   #       uses: aws-actions/configure-aws-credentials@v4
   #       with:
@@ -63,4 +66,3 @@ jobs:
   #         aws cloudfront create-invalidation \
   #           --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
   #           --paths "/*"
-
