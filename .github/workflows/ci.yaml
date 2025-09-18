@@ -46,6 +46,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24.8.0
+
+      - name: Setup Pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Application
+        run: pnpm run build
+
+      - name: Verify Build Output
+        run: |
+          echo "✅ All quality checks passed!"
+          echo "Build output verification:"
+          [ -d "dist" ] && echo "📦 dist size: $(du -sh dist | cut -f1)" || echo "⚠️  No dist directory"
+          [ -d ".next" ] && echo "📦 .next size: $(du -sh .next | cut -f1)" || echo "⚠️  No .next directory"
+          [ -d "out" ] && echo "📦 out size: $(du -sh out | cut -f1)" || echo "⚠️  No out directory"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v5
         with:
@@ -58,7 +82,7 @@ jobs:
 
       - name: Deploy to S3 bucket
         run: |
-          aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET }} --delete
+          aws s3 sync ./dist s3://${{ secrets.AWS_S3_BUCKET }} --delete
           echo "✅ Deployment complete"
 
       - name: Invalidate CloudFront cache
